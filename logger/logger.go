@@ -15,26 +15,27 @@ const (
 	Lshortfile                    // 文件名+行号：d.go:23（会覆盖掉Llongfile）
 	LUTC                          // 使用UTC时间
 	LstdFlags     = Ldate | Ltime // 标准logger的初始值
+	LogFile = "./golang.log"
 )
 
-func Logs(log_info string)  {
+func Logs(LogInfo string)  {
 	/*
 		O_RDWR      读写模式打开文件
 		O_APPEND    写操作时将数据附加到文件尾部
 		O_CREATE    如果不存在将创建一个新文件
 	*/
 
-	logFile, err := os.OpenFile("./golang.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0766)
+	logFile, err := os.OpenFile(LogFile, os.O_RDWR | os.O_CREATE | os.O_APPEND, 0766)
 	if err != nil {
 		log.Panic(err.Error())
 	} else {
-		log.Println(log_info)
+		log.Println(LogInfo)
 
 		log.SetOutput(logFile)
 
 		log.SetPrefix("[log]")
 		log.SetFlags(log.LstdFlags | log.Llongfile | log.LUTC)
-		log.Println([]string{log_info})
+		log.Println([]string{LogInfo})
 
 		//logger := log.New(logFile, "[logger]", log.LstdFlags | log.Lshortfile | log.LUTC)
 		//logger.Println([]string{"你好", "golang日志 - logger"})
@@ -42,4 +43,3 @@ func Logs(log_info string)  {
 
 	defer logFile.Close()
 }
-
