@@ -12,12 +12,12 @@ const (
 )
 
 var (
-	node_id *string
-	piece_id *int
-	port *int
+	NodeID *string
+	PieceID *int
+	Port *int
 )
 
-func ZapLogger(node_id string, piece_id int, port int) {
+func ZapLogger(NodeID string, PieceID int, Port int) {
 	encoderConfig := zapcore.EncoderConfig{
 		TimeKey:        "time",
 		LevelKey:       "level",
@@ -51,9 +51,9 @@ func ZapLogger(node_id string, piece_id int, port int) {
 		panic(fmt.Sprintf("log 初始化失败: %v", err))
 	}
 
-	logger.Info(node_id,
-		zap.Int("port", port),
-		zap.Int("piece_id", piece_id),
+	logger.Info(NodeID,
+		zap.Int("Port", Port),
+		zap.Int("piece_id", PieceID),
 	//	zap.String("url", "http://www.baidu.com"),
 	//	zap.Int("attempt", 3),
 		zap.Duration("backoff", time.Second),
