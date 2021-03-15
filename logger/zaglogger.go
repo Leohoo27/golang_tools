@@ -51,7 +51,7 @@ func ZapLogger(logText string, logTextName string) {
 	}
 
 	logger.Info(logText,	
-		zap.String("logTextName", logTextName),
+		zap.String("logTextTag", logTextName),
 	//	zap.Int("attempt", 3),
 		zap.Duration("backoff", time.Second),
 	)
