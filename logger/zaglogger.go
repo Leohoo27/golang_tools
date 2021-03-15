@@ -12,20 +12,16 @@ const (
 )
 
 var (
-	successfulStorageNodeId *string
-	successfullStorageNodeAddress *string
-	storageNodeId *string
-	limit *string
-	pieceID *string
-	peerID *string
+	logText *string
+	logTextName *string
 )
 
-func ZapLogger(NodeID string, PieceID int, Port int) {
+func ZapLogger(logText string, logTextName string) {
 	encoderConfig := zapcore.EncoderConfig{
 		TimeKey:        "time",
 		LevelKey:       "level",
 		NameKey:        "logger",
-		CallerKey:      "caller",
+		// CallerKey:      "caller",
 		MessageKey:     "msg",
 		StacktraceKey:  "stacktrace",
 		LineEnding:     zapcore.DefaultLineEnding,
@@ -54,10 +50,8 @@ func ZapLogger(NodeID string, PieceID int, Port int) {
 		panic(fmt.Sprintf("log 初始化失败: %v", err))
 	}
 
-	logger.Info(NodeID,
-		zap.Int("Port", Port),
-		zap.Int("piece_id", PieceID),
-	//	zap.String("url", "http://www.baidu.com"),
+	logger.Info(logText,	
+		zap.String("logTextName", logTextName),
 	//	zap.Int("attempt", 3),
 		zap.Duration("backoff", time.Second),
 	)
