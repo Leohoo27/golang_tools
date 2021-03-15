@@ -12,9 +12,12 @@ const (
 )
 
 var (
-	NodeID *string
-	PieceID *int
-	Port *int
+	successfulStorageNodeId *string
+	successfullStorageNodeAddress *string
+	storageNodeId *string
+	limit *string
+	pieceID *string
+	peerID *string
 )
 
 func ZapLogger(NodeID string, PieceID int, Port int) {
